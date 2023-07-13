@@ -1,0 +1,162 @@
+/* 作为后备字体，如果 Lato 字体无法加载，浏览器将使用默认的无衬线字体作为替代 */
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* 渐变效果，关键词background-image: linear-gradient */
+    background-image: linear-gradient(0deg,
+            rgba(247, 247, 247, 1) 23.8%,
+            #4ee8f3);
+    height: 100vh; /* vh表示百分比，等价于% */
+    display: flex;
+    /* 沿垂直主轴上下垂直排列 */
+    flex-direction: column;
+    /* 主轴水平居中 */
+    align-items: center;
+    /* 主轴垂直居中 */
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+}
+
+.music-container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 20px 20px 0 rgba(8, 182, 212, 0.822);
+    /* flex意为弹性布局，使元素能实现水平居中、垂直居中、等分空间、自适应宽度等布局需求*/
+    display: flex;
+    padding: 20px 30px;
+    /* 指定元素的定位方式为相对定位 */
+    position: relative;
+    margin: 70px 0;
+    /* music-container在重叠部分将位于其他具有较低层叠顺序的元素之上，在视觉上覆盖它们 */
+    z-index: 10;
+}
+
+.img-container {
+    position: relative;
+    width: 110px;
+}
+/* 创造封面中的小圆点，制造唱片效果 */
+.img-container::after {
+    content: "";
+    background-color: #000000;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    /* 旋转 */
+    transform: translate(-50%, 50%);
+}
+
+.img-container img {
+    border-radius: 50%;
+    height: 110px;
+    width: inherit;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* 封面360°旋转，默认不动 */
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.music-container.play .img-container img {
+    /* 播放 */
+    animation-play-state: running;
+}
+
+/* 定义旋转动画 */
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.action-btn {
+    /* 取消默认样式 */
+    border: 0;
+    background-color: #fff;
+    /* ----- */
+    color: #0decfc;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 20px;
+}
+
+.action-btn:focus {
+    /* 取消默认样式 */
+    outline: 0;
+}
+
+.action-btn.action-btn-big {
+    color: #0cdae9;
+    font-size: 30px;
+}
+
+.music-info {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    /* 父元素宽度-40px */
+    width: calc(100% - 40px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px 15px 0 0;
+    padding: 10px 10px 10px 150px;
+    /* 没播放时默认隐藏 */
+    opacity: 0;
+    transform: translateY(0%);
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+    z-index: 0;
+}
+
+.music-info h4 {
+    /* 取消默认边距 */
+    margin: 0;
+}
+/*选择位于具有 .music-container 和 .play 类的父元素内的 .music-info，
+定义了当音乐播放器处于播放状态时，.music-info 的样式 */
+.music-container.play .music-info {
+    opacity: 1;
+    transform: translateY(-100%);
+}
+
+/* 调整播放进度条样式 */
+/* 定义了进度条容器的样式，包括背景颜色、边框半径、鼠标指针样式、上下外边距、高度和宽度 */
+.progress-container {
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    height: 4px;
+    width: 100%;
+}
+/* 定义了进度条的样式，包括背景颜色、边框半径、高度、初始宽度（0%）和宽度过渡效果 */
+
+.progress {
+    background-color: #0decfc;
+    border-radius: 5px;
+    height: 100%;
+    /* 一开始进度条长度为0 */
+    width: 0%;
+    transition: width 0.1s linear;
+/* 进度条容器和进度条分开定义可以更好地控制它们的外观和交互效果，progress被镶嵌在progress-container中*/
+}

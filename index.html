@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 字体库，通过link可以从网页进入而不用下载font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+    <!-- 与外部CSS文件连接 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 网页抬头显示 -->
+    <title>音楽プレーヤー!!!₍˄·͈༝·͈˄*₎◞ ̑̑ </title>
+</head>
+
+<body>
+    <!-- 音乐头上的文字显示 -->
+    <h1 style="color:rgb(253, 236, 200)">私の音楽プレーヤーへようこそ!!(∗ᵒ̶̶̷̀ω˂̶́∗)੭₎₎̊₊♡</h1>
+    <!-- 音乐播放器的内容，包括界面呈现，音频和封面 -->
+    <div class="music-container" id="music-container">
+        <!-- 音乐界面要呈现出的信息 -->
+        <div class="music-info">
+            <!-- 音乐标题 -->
+            <h4 id="title"></h4>
+            <!-- 音乐播放进度条 -->
+            <!-- 在JS中引用，主要是实现交互，可拖动进度条 -->
+            <div class="progress-container" id="progress-container">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+
+        <!-- 第一首音乐 -->
+        <audio src="music/鏡面の波 (TSAR Remix).mp3" id="audio"></audio>
+
+        <!-- 音乐封面 -->
+        <div class="img-container">
+            <img src="img/鏡面の波 (TSAR Remix).jpg" alt="music-cover" id="music-cover">
+        </div>
+        <!-- button用于创建按钮元素，切换上下一首和暂停，在JS中也引用进行了交互 -->
+        <!-- 其中<i>是用来在font-awesome中引用前进暂停后退按钮的 -->
+        <!-- navigation类名用作标识导航栏，在style.css中引用到 -->
+        <div class="navigation">
+            <button id="prev" class="action-btn">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button id="play" class="action-btn action-btn-big">
+                <i class="fas fa-play"></i>
+            </button>
+            <button id="next" class="action-btn">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+    </div>
+    <!-- 引入js文件 -->
+    <script src="script.js"></script>
+</body>
+
+</html>
